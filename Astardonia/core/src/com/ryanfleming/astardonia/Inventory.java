@@ -58,6 +58,7 @@ public class Inventory {
 				}
 			}
 			if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
+				batch.end();
 				openc = -1;
 				return -1;
 			}
