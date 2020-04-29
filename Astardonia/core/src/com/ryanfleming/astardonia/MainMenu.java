@@ -74,7 +74,13 @@ public class MainMenu{
 			inventory = planet.inventory;
 			inventory.printInventory();
 			inventory.renderInventory();
-			
+			if(inventory.renderCrafting() == 1) {
+				planet = new GeneratePlanet();
+				render = new RenderPlanet();
+				System.out.println("Warping Initiated!");
+			}else if(inventory.renderCrafting() == -1){
+				System.out.println("Warping Cancelled!");
+			}
 			player.handleMovement(planet);
 			if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
 				mainMenu = 0;
