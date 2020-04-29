@@ -9,13 +9,14 @@ public class Inventory {
 	int stone = 0, grass = 0, dirt = 0, coal = 0, mythore = 0;
 	Block block;
 	SpriteBatch batch;
-	Texture invTexture;
-	int open = -1;
+	Texture invTexture, warpTexture;
+	int open = -1, openc = -1;
 	
 	public Inventory() {
 		block = new Block();
 		batch = new SpriteBatch();
 		invTexture = new Texture("Inventory.png");
+		warpTexture = new Texture("WarpPic.png");
 	}
 	
 	public void printInventory(){
@@ -36,6 +37,34 @@ public class Inventory {
 			
 		}
 		batch.end();
+	}
+	
+	public int renderCrafting() {
+		batch.begin();
+		if(Gdx.input.isKeyJustPressed(Input.Keys.C)){
+			openc = 1;
+		}
+		if(openc == 1) {
+			batch.draw(warpTexture, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+			if(Gdx.input.isKeyJustPressed(Input.Keys.C)){
+				if(stone >= 5) {
+					batch.end();
+					stone = stone - 5;
+					return 1;
+				}else {
+					batch.end();
+					System.out.println("You need 5 stone to warp!");
+					return -1;
+				}
+			}
+			if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
+				openc = -1;
+				return -1;
+			}
+			
+		}
+		batch.end();
+		return 0;
 	}
 	
 	public void location() {
